@@ -14,8 +14,8 @@ public class ClassTester : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
 
+        string xd = "s";
 
         BasePlayer test = new StrikerPlayer();
 
