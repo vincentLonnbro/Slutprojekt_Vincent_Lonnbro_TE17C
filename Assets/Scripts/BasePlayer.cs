@@ -8,6 +8,19 @@ public class BasePlayer : MonoBehaviour
 
     public static string[] rarityList = { "Bronze", "Silver", "Gold" }; // de olika rarities spelarna kan ha. Detta kommer att ha påverkan på de stats spelarna kommer att ha. 
 
+    string role;
+    public string Role
+    {
+        get
+        {
+            return role;
+        } 
+        set
+        {
+            role = value;
+        }
+    }
+
     string position;
     public string Position
     {
@@ -18,6 +31,18 @@ public class BasePlayer : MonoBehaviour
         set
         {
             position = value;
+        }
+    }
+    string type;
+    public string Type
+    {
+        get
+        {
+            return type;
+        }
+        set
+        {
+            type = value; 
         }
     }
 
@@ -55,7 +80,19 @@ public class BasePlayer : MonoBehaviour
 
     public BasePlayer()
     {
-        Rarity = rarityList[Random.Range(0, rarityList.Length)];
+        int rnd = Random.Range(1, 11);
+        if (rnd <= 7)
+        {
+            Rarity = rarityList[0];
+        }
+        else if (rnd > 7 && rnd < 10)
+        {
+            Rarity = rarityList[1];
+        }
+        else
+        {
+            Rarity = rarityList[2];
+        }
 
         for (int i = 0; i < rarityList.Length; i++)
         {

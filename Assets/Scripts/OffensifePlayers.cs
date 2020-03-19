@@ -4,11 +4,11 @@ using UnityEditor;
 using UnityEngine;
 
 
-class MidfielderPlayer : BasePlayer
+class OffensivePlayer : BasePlayer
 {
-    public MidfielderPlayer()
+    public OffensivePlayer()
     {
-        Position = "Midfielder";
+        Role = "Offensive";
     }
 }
 

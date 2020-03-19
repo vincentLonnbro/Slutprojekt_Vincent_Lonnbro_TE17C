@@ -8,7 +8,7 @@ class DefenderPlayer : BasePlayer
 {
     public DefenderPlayer()
     {
-        Position = "Defender"; 
+        Role = "Defending"; 
     }
 
 
