@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using System.Threading;
 
 public class ClassTester : MonoBehaviour
 {
@@ -78,7 +79,12 @@ public class ClassTester : MonoBehaviour
                     Goals.text = goalsStart + " - " + goalsOpp;
                 }
             }
+            StartCoroutine(Timer(1));
         }
+    }
+    IEnumerator Timer(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
     }
 
     private int TeamScoreCalc(List<BasePlayer> team)
@@ -91,7 +97,6 @@ public class ClassTester : MonoBehaviour
         score += Random.Range(1, 11);
         return score;
     }
-
     private bool Game(List<BasePlayer> attackingTeam, List<BasePlayer> defendingTeam, string teamName)
     {
 
