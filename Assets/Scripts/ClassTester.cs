@@ -15,6 +15,9 @@ public class ClassTester : MonoBehaviour
     [SerializeField]
     Text counterText;
 
+    [SerializeField]
+    Text Goals;
+
     static List<BasePlayer> startingFive = new List<BasePlayer>();
     static List<BasePlayer> opposingFive = new List<BasePlayer>();
 
@@ -26,8 +29,10 @@ public class ClassTester : MonoBehaviour
         PlayerListSetter(startingFive);
         PlayerListSetter(opposingFive);
 
+
         textStarting.text = PlayerShower(startingFive);
         textOpposing.text = PlayerShower(opposingFive);
+        counterText.text = TeamScoreCalc(startingFive).ToString() + "\n" + TeamScoreCalc(opposingFive).ToString();
     }
 
     static string PlayerShower(List<BasePlayer> team)
@@ -36,7 +41,7 @@ public class ClassTester : MonoBehaviour
 
         for (int i = 0; i < team.Count; i++)
         {
-            returnVal += "Role: " +  team[i].Role + "\nPosition: " + team[i].Position + "\nRarity: " + team[i].Rarity + "\nRating: " + team[i].Stat + "\n\n";
+            returnVal += "Role: " + team[i].Role + "\nPosition: " + team[i].Position + "\nRarity: " + team[i].Rarity + "\nRating: " + team[i].Stat.ToString() + "\n\n";
         }
         return returnVal;
     }
@@ -49,38 +54,80 @@ public class ClassTester : MonoBehaviour
         team.Add(new Striker());
     }
 
-    public void Game()
-    {
-        Debug.Log("HALLÅ");
-        for (int i = 0; i < 90; i++)
+    public void GameStarter()
+    { 
+        int goalsStart = 0;
+        int goalsOpp = 0;
+
+
+        for (int i = 0; i < 90 + Random.Range(1, 7); i++)
         {
-            if (MidfielderCheck(opposingFive[3], PlayerChooser(startingFive[1], startingFive[2])))
+            if (TeamScoreCalc(startingFive) > TeamScoreCalc(opposingFive))
             {
-                if (DefenderCheck(PlayerChooser(opposingFive[1], opposingFive[2]), startingFive[3]))
+                if (Game(startingFive, opposingFive, "StartingTeam"))
                 {
-                    if (GoalkeeperCheck(opposingFive[0], startingFive[4]))
-                    {
-                        Debug.Log("Mål" + (i + 1));
-                    }
-                    else
-                    {
-                        Debug.Log("Avslut");
-                    }
-                }
-                else
-                {
-                    Debug.Log("Brytning försvarare");
+                    goalsStart += 1;
+                    Goals.text = goalsStart + " - " + goalsOpp;
                 }
             }
             else
             {
-                Debug.Log("Brytning MIttfältare");
+                if (Game(opposingFive, startingFive, "OpposingTeam"))
+                {
+                    goalsOpp += 1;
+                    Goals.text = goalsStart + " - " + goalsOpp;
+                }
             }
         }
     }
+
+    private int TeamScoreCalc(List<BasePlayer> team)
+    {
+        int score = 0;
+        for (int i = 0; i < team.Count; i++)
+        {
+            score += team[i].Stat;
+        }
+        score += Random.Range(1, 11);
+        return score;
+    }
+
+    private bool Game(List<BasePlayer> attackingTeam, List<BasePlayer> defendingTeam, string teamName)
+    {
+
+        if (Random.Range(1, 101) < 35)
+        {
+            Debug.Log("Anfall " + teamName);
+
+            if (DefenderCheck(PlayerChooser(defendingTeam[1], defendingTeam[2]), attackingTeam[3]))
+            {
+                if (GoalkeeperCheck(defendingTeam[0], attackingTeam[4]))
+                {
+                    Debug.Log("Mål");
+                    return true;
+                }
+                else
+                {
+                    Debug.Log("Avslut");
+                    return false;
+                }
+            }
+            else
+            {
+                Debug.Log("Brytning försvarare");
+                return false;
+            }
+        }
+        else
+        {
+            Debug.Log("Inget anfall");
+            return false;
+        }
+
+    }
     static BasePlayer PlayerChooser(BasePlayer p1, BasePlayer p2)
     {
-        if (Random.Range(0,2) == 1)
+        if (Random.Range(0, 2) == 1)
         {
             return p1;
         }
@@ -89,17 +136,7 @@ public class ClassTester : MonoBehaviour
             return p2;
         }
     }
-    static bool MidfielderCheck(BasePlayer defending, BasePlayer attacker)
-    {
-        if (defending.Stat + Random.Range(3, 10) > attacker.Stat + Random.Range(3, 10))
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
+
     static bool DefenderCheck(BasePlayer defending, BasePlayer attacker)
     {
         if (defending.Stat + Random.Range(3, 10) > attacker.Stat + Random.Range(3, 10))
