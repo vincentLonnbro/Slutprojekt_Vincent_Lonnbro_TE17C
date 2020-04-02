@@ -78,6 +78,27 @@ public class BasePlayer : MonoBehaviour
         get; set; 
     }
 
+    int exp = 0;
+    public int Exp
+    {
+        get
+        {
+            return exp;
+        }
+        set
+        {
+            exp = value;
+        }
+    }
+
+    public void ExpCheck()
+    {
+        if (Exp >= 10)
+        {
+            Stat += 1;
+        }
+    }
+
     public BasePlayer()
     {
         int rnd = Random.Range(1, 11);

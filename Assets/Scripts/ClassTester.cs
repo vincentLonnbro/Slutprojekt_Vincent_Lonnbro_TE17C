@@ -19,21 +19,19 @@ public class ClassTester : MonoBehaviour
     [SerializeField]
     Text Goals;
 
-    static List<BasePlayer> startingFive = new List<BasePlayer>();
-    static List<BasePlayer> opposingFive = new List<BasePlayer>();
+    public static Teams startingFive = new Teams();
+    public static Teams opposingFive = new Teams();
 
+    
 
     public void Tester()
     {
-        startingFive.Clear();
-        opposingFive.Clear();
-        PlayerListSetter(startingFive);
-        PlayerListSetter(opposingFive);
+        startingFive.TeamMaker();
+        opposingFive.TeamMaker();
 
-
-        textStarting.text = PlayerShower(startingFive);
-        textOpposing.text = PlayerShower(opposingFive);
-        counterText.text = TeamScoreCalc(startingFive).ToString() + "\n" + TeamScoreCalc(opposingFive).ToString();
+        textStarting.text = startingFive.PlayerShower();
+        textOpposing.text = opposingFive.PlayerShower();
+        counterText.text = startingFive.TeamScoreCalc().ToString() + "\n" + opposingFive.TeamScoreCalc().ToString();
     }
 
     static string PlayerShower(List<BasePlayer> team)
@@ -56,16 +54,16 @@ public class ClassTester : MonoBehaviour
     }
 
     public void GameStarter()
-    { 
+    {
         int goalsStart = 0;
         int goalsOpp = 0;
 
 
         for (int i = 0; i < 90 + Random.Range(1, 7); i++)
         {
-            if (TeamScoreCalc(startingFive) > TeamScoreCalc(opposingFive))
+            if (startingFive.TeamScoreCalc() > opposingFive.TeamScoreCalc())
             {
-                if (Game(startingFive, opposingFive, "StartingTeam"))
+                if (Game(startingFive.players, opposingFive.players, "StartingTeam"))
                 {
                     goalsStart += 1;
                     Goals.text = goalsStart + " - " + goalsOpp;
@@ -73,7 +71,7 @@ public class ClassTester : MonoBehaviour
             }
             else
             {
-                if (Game(opposingFive, startingFive, "OpposingTeam"))
+                if (Game(opposingFive.players, startingFive.players, "OpposingTeam"))
                 {
                     goalsOpp += 1;
                     Goals.text = goalsStart + " - " + goalsOpp;
