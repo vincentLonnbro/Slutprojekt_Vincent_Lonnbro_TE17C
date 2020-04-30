@@ -408,7 +408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textStarting: {fileID: 0}
   textOpposing: {fileID: 0}
-  counterText: {fileID: 0}
+  counterText: {fileID: 1361912719}
   Goals: {fileID: 609010710}
 --- !u!114 &519612227
 MonoBehaviour:

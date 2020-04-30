@@ -11,5 +11,9 @@ class Striker : OffensivePlayer
     {
         Position = "Striker";
     }
+    public override void ExpCheck(int newExp)
+    {
+        base.ExpCheck(newExp + 1);
+    }
 }
 

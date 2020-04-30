@@ -10,5 +10,9 @@ class Goalkeeper : DefenderPlayer
     {
         Position = "Goalkeeper";
     }
+    public override void ExpCheck(int newExp)
+    {
+        base.ExpCheck(newExp + 1);
+    }
 }
 

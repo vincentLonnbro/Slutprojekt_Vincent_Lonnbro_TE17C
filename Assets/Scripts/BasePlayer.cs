@@ -91,8 +91,9 @@ public class BasePlayer : MonoBehaviour
         }
     }
 
-    public void ExpCheck()
+    public virtual void ExpCheck(int newExp)
     {
+        Exp += newExp;
         if (Exp >= 10)
         {
             Stat += 1;

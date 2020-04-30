@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class Teams
 {
-    public List<BasePlayer> players = new List<BasePlayer>();
-    public void TeamMaker()
+    public List<BasePlayer> players = new List<BasePlayer>();   // Skapar en BasePlayer-lista
+    public void TeamMaker() // Lägger till spelare med olika positioner i listan ovan
     {
         players.Clear();
         players.Add(new Goalkeeper());
@@ -17,7 +17,7 @@ public class Teams
         players.Add(new Striker());
     }
 
-    public string PlayerShower()
+    public string PlayerShower()    // Skapar och returnerar en stor string med alla spelares roll, position, stat och rarity. 
     {
         string returnVal = "";
 
@@ -28,7 +28,7 @@ public class Teams
         return returnVal;
     }
 
-    public int TeamScoreCalc()
+    public int TeamScoreCalc()  // Används för att sammanställa alla spelares stat till en stat. 
     {
         int score = 0;
         for (int i = 0; i < players.Count; i++)
