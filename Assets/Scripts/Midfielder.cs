@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 class Midfielder : OffensivePlayer
 {
-    public Midfielder()
+    public Midfielder() // Position
     {
         Position = "Midfielder";
     }

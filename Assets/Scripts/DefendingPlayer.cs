@@ -6,7 +6,7 @@ using UnityEngine;
 
 class DefenderPlayer : BasePlayer
 {
-    public DefenderPlayer()
+    public DefenderPlayer() // ROll
     {
         Role = "Defending"; 
     }
